@@ -5,4 +5,4 @@ A Go HTTP client for consuming RESTful endpoints. This is an educational project
 Will write this up when it's in better shape.
 
 ## Unit Tests
-Run with `go test ./...`.
+Run with `go test -v ./...`.
