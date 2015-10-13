@@ -10,7 +10,7 @@ type GorchClient struct {
 	onError func(err error)
 }
 
-func Create(baseUrl string) *GorchClient {
+func New(baseUrl string) *GorchClient {
 	gorchClient := new(GorchClient)
 	gorchClient.baseUrl = baseUrl
 	return gorchClient

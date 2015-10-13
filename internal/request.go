@@ -10,7 +10,7 @@ type GorchRequest struct {
 	queryString string
 }
 
-func CreateRequest(url string, method string) *GorchRequest {
+func NewRequest(url string, method string) *GorchRequest {
 	gorchRequest := new(GorchRequest)
 	gorchRequest.url = url
 	gorchRequest.method = method
