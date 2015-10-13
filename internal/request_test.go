@@ -1,15 +1,14 @@
-package gorch
+package internal
 
 import (
 	"github.com/stretchr/testify/assert"
-	"gorch/internal"
 	"testing"
 )
 
 func TestSetQueryString(t *testing.T) {
 	const testName = "It should correctly format query strings"
 
-	var gorchRequest *internal.GorchRequest = internal.NewRequest("http://url", "GET")
+	var gorchRequest *GorchRequest = NewRequest("http://url", "GET")
 	queryParams := make(map[string]string)
 	queryParams["key1"] = "value1"
 	queryParams["key2"] = "value2"

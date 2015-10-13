@@ -34,6 +34,7 @@ func (gorchRequest *GorchRequest) SetQueryString(queryParams map[string]string) 
 		}
 
 		buffer.WriteString(separator + key + "=" + value)
+		i++
 	}
 
 	gorchRequest.queryString = buffer.String()
