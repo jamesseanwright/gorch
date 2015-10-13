@@ -1,4 +1,8 @@
-package request
+package internal
+
+import (
+	"bytes"
+)
 
 type GorchRequest struct {
 	url         string
@@ -6,15 +10,16 @@ type GorchRequest struct {
 	queryString string
 }
 
-func create(url, method) *GorchRequest {
+func Create(url string, method string) *GorchRequest {
 	gorchRequest := new(GorchRequest)
 	gorchRequest.url = url
 	gorchRequest.method = method
+	return gorchRequest
 }
 
-func (gorchRequest *GorchRequest) setQueryString(queryParams *map[string]string) {
+func (gorchRequest *GorchRequest) SetQueryString(queryParams map[string]string) {
 	var separator string
-	queryString := ""
+	var buffer bytes.Buffer
 	i := 0
 
 	for key, value := range queryParams {
@@ -24,8 +29,8 @@ func (gorchRequest *GorchRequest) setQueryString(queryParams *map[string]string)
 			separator = "?"
 		}
 
-		queryString += separator + key + "=" + value
+		buffer.WriteString(separator + key + "=" + value)
 	}
 
-	return queryString
+	return buffer.String()
 }

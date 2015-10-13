@@ -1,7 +1,7 @@
 package gorch
 
 import (
-	"internal/request"
+	"gorch/internal"
 	"net/http"
 )
 
@@ -10,14 +10,14 @@ type GorchClient struct {
 	onError func(err error)
 }
 
-func create(baseUrl string, onError func(err error)) *GorchClient {
+func Create(baseUrl string, onError func(err error)) *GorchClient {
 	gorchClient := new(GorchClient)
 	gorchClient.baseUrl = baseUrl
 	gorchClient.onError = onError
 	return gorchClient
 }
 
-func (gorchClient *GorchClient) get(url endpoint, queryParams map[string]string) {
-	req := Gorch
+func (gorchClient *GorchClient) Get(url endpoint, queryParams map[string]string) {
+	req := GorchRequest.create(url, endpoint)
 	resp, err := http.Get(gorchClient.baseUrl + endpoint)
 }
