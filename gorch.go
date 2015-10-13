@@ -8,7 +8,6 @@ import (
 type Gorch struct {
 	baseUrl        string
 	currentRequest request.Request
-	client         client.Client
 }
 
 // func New(baseUrl string) *Gorch {
@@ -34,5 +33,5 @@ func (gorch *Gorch) WithHeaders(headers map[string]string) *Gorch {
 }
 
 func (gorch *Gorch) Execute() {
-	gorch.client.execute(gorch.currentRequest)
+	client.execute(gorch.currentRequest)
 }
