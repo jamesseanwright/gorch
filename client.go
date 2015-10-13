@@ -1,7 +1,7 @@
 package gorch
 
 import (
-	"gorch/internal/request"
+	"internal/request"
 	"net/http"
 )
 
