@@ -1,8 +1,8 @@
 package gorch
 
 import (
+	"fmt"
 	"gorch/internal"
-	"net/http"
 )
 
 type GorchClient struct {
@@ -10,14 +10,16 @@ type GorchClient struct {
 	onError func(err error)
 }
 
-func Create(baseUrl string, onError func(err error)) *GorchClient {
+func Create(baseUrl string) *GorchClient {
 	gorchClient := new(GorchClient)
 	gorchClient.baseUrl = baseUrl
-	gorchClient.onError = onError
 	return gorchClient
 }
 
-func (gorchClient *GorchClient) Get(url endpoint, queryParams map[string]string) {
-	req := GorchRequest.create(url, endpoint)
-	resp, err := http.Get(gorchClient.baseUrl + endpoint)
+// TODO: return some deserialised object
+func (gorchClient *GorchClient) Get(endpoint string, queryParams map[string]string) string {
+	var req *internal.GorchRequest = internal.CreateRequest(gorchClient.baseUrl, endpoint)
+	//resp, err := http.Get(gorchClient.baseUrl + endpoint)
+	fmt.Print(req.GetQueryString())
+	return "deserialised to obj"
 }

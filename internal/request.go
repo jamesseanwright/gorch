@@ -10,11 +10,15 @@ type GorchRequest struct {
 	queryString string
 }
 
-func Create(url string, method string) *GorchRequest {
+func CreateRequest(url string, method string) *GorchRequest {
 	gorchRequest := new(GorchRequest)
 	gorchRequest.url = url
 	gorchRequest.method = method
 	return gorchRequest
+}
+
+func (gorchRequest *GorchRequest) GetQueryString() string {
+	return gorchRequest.queryString
 }
 
 func (gorchRequest *GorchRequest) SetQueryString(queryParams map[string]string) {
@@ -32,5 +36,5 @@ func (gorchRequest *GorchRequest) SetQueryString(queryParams map[string]string) 
 		buffer.WriteString(separator + key + "=" + value)
 	}
 
-	return buffer.String()
+	gorchRequest.queryString = buffer.String()
 }
