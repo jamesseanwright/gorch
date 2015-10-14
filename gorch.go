@@ -8,12 +8,12 @@ import (
 type Gorch struct {
 	baseUrl        string
 	currentRequest request.Request
-	client         client.Client
+	client         *client.Client
 }
 
 func New(baseUrl string) *Gorch {
 	gorch := new(Gorch)
-	gorch.client = client.New(baseUrl)
+	gorch.client = client.New()
 	return gorch
 }
 
@@ -28,10 +28,15 @@ func (gorch *Gorch) WithParams(params map[string]string) *Gorch {
 }
 
 func (gorch *Gorch) WithHeaders(headers map[string]string) *Gorch {
-	gorch.currentRequest.SetHeaders(headers)
+	//gorch.currentRequest.SetHeaders(headers)
+	return gorch
+}
+
+func (gorch *Gorch) DeserialiseTo(targetType interface{}) *Gorch {
+	gorch.currentRequest.SetDeserialisationTarget(targetType)
 	return gorch
 }
 
 func (gorch *Gorch) Execute() {
-	gorch.client.execute(gorch.currentRequest)
+	gorch.client.Execute(gorch.currentRequest)
 }

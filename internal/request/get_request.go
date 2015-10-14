@@ -5,24 +5,33 @@ import (
 )
 
 type GetRequest struct {
-	url         string
-	queryString string
+	url                   string
+	queryString           string
+	deserialisationTarget interface{} // TODO: move to request base class
 }
 
-func (getRequest *GetRequest) GetUrl() string {
+func (getRequest *GetRequest) Url() string {
 	return getRequest.url + getRequest.queryString
 }
 
-func (getRequest *GetRequest) GetMethod() string {
+func (getRequest *GetRequest) Method() string {
 	return "GET"
 }
 
-func (getRequest *GetRequest) GetBody() string {
+func (getRequest *GetRequest) Body() string {
 	return ""
+}
+
+func (getRequest *GetRequest) DeserialisationTarget() interface{} {
+	return getRequest.deserialisationTarget
 }
 
 func (getRequest *GetRequest) SetParams(params map[string]string) {
 	getRequest.queryString = CreateQueryString(params)
+}
+
+func (getRequest *GetRequest) SetDeserialisationTarget(targetType interface{}) {
+	getRequest.deserialisationTarget = targetType
 }
 
 func NewGetRequest(url string) *GetRequest {

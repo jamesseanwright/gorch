@@ -1,6 +1,7 @@
 package client
 
 import (
+	"gorch/internal/deserialiser"
 	"gorch/internal/request"
 	"net/http"
 )
@@ -15,6 +16,18 @@ func New() *Client {
 	return client
 }
 
-func (client *Client) execute(request request.Request) {
-	return client.httpClient.Do(http.NewRequest(request.GetMethod(), request.GetUrl(), nil))
+func (client *Client) Execute(request request.Request) (interface{}, error) {
+	respPayload, err := http.NewRequest(request.Method(), request.Url(), nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := client.httpClient.Do(respPayload)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return deserialiser.InstanceFromReadCloser(resp.Body, request.DeserialisationTarget())
 }

@@ -1,8 +1,10 @@
 package request
 
 type Request interface {
-	GetUrl() string
-	GetMethod() string
-	GetBody() string
+	Url() string
+	Method() string
+	Body() string
+	DeserialisationTarget() interface{}
 	SetParams(params map[string]string)
+	SetDeserialisationTarget(targetType interface{})
 }
