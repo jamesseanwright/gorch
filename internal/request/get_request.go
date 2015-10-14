@@ -30,8 +30,8 @@ func (getRequest *GetRequest) SetParams(params map[string]string) {
 	getRequest.queryString = CreateQueryString(params)
 }
 
-func (getRequest *GetRequest) SetDeserialisationTarget(targetType interface{}) {
-	getRequest.deserialisationTarget = targetType
+func (getRequest *GetRequest) SetDeserialisationTarget(target interface{}) {
+	getRequest.deserialisationTarget = target
 }
 
 func NewGetRequest(url string) *GetRequest {

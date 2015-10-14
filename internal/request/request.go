@@ -6,5 +6,5 @@ type Request interface {
 	Body() string
 	DeserialisationTarget() interface{}
 	SetParams(params map[string]string)
-	SetDeserialisationTarget(targetType interface{})
+	SetDeserialisationTarget(target interface{})
 }

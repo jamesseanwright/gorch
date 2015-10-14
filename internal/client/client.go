@@ -29,5 +29,8 @@ func (client *Client) Execute(request request.Request) (interface{}, error) {
 		return nil, err
 	}
 
-	return deserialiser.InstanceFromReadCloser(resp.Body, request.DeserialisationTarget())
+	target := request.DeserialisationTarget()
+
+	err = deserialiser.InstanceFromReader(resp.Body, target)
+	return target, err
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func TestSetQueryString(t *testing.T) {
-	testName := "It should correctly format query strings"
+	const testName = "It should correctly format query strings"
 
 	queryParams := make(map[string]string)
 	queryParams["key1"] = "value1"
@@ -14,7 +14,7 @@ func TestSetQueryString(t *testing.T) {
 	queryParams["key3"] = "value3"
 
 	actual := CreateQueryString(queryParams)
-	expected := "?key1=value1&key2=value2&key3=value3"
+	const expected = "?key1=value1&key2=value2&key3=value3"
 
 	assert.EqualValues(t, expected, actual, testName)
 }

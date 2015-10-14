@@ -3,12 +3,18 @@ package deserialiser
 import (
 	"encoding/json"
 	"io"
-	"reflect"
 )
 
-func InstanceFromReadCloser(reader io.ReadCloser, target interface{}) (interface{}, error) {
-	instancePtr := reflect.New(reflect.TypeOf(target))
+func InstanceFromReader(reader io.Reader, targetPtr interface{}) error {
 	decoder := json.NewDecoder(reader)
-	err := decoder.Decode(instancePtr)
-	return instancePtr.Interface(), err
+
+	for decoder.More() {
+		err := decoder.Decode(targetPtr)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
