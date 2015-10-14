@@ -5,7 +5,16 @@ import (
 	"net/http"
 )
 
-func execute(request request.Request) {
-	httpClient := new(http.Client)
-	return httpClient.Do(http.NewRequest(request.GetMethod(), request.GetUrl(), nil))
+type Client struct {
+	httpClient *http.Client
+}
+
+func New() *Client {
+	client := new(Client)
+	client.httpClient = new(http.Client)
+	return client
+}
+
+func (client *Client) execute(request request.Request) {
+	return client.httpClient.Do(http.NewRequest(request.GetMethod(), request.GetUrl(), nil))
 }

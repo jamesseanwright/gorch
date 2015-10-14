@@ -17,6 +17,10 @@ func (getRequest *GetRequest) GetMethod() string {
 	return "GET"
 }
 
+func (getRequest *GetRequest) GetBody() string {
+	return ""
+}
+
 func (getRequest *GetRequest) SetParams(params map[string]string) {
 	getRequest.queryString = CreateQueryString(params)
 }

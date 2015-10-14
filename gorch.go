@@ -8,15 +8,15 @@ import (
 type Gorch struct {
 	baseUrl        string
 	currentRequest request.Request
+	client         client.Client
 }
 
-// func New(baseUrl string) *Gorch {
-// 	gorch := new(Gorch)
-// 	gorch.client = internal.NewClient(baseUrl)
-// 	return gorch
-// }
+func New(baseUrl string) *Gorch {
+	gorch := new(Gorch)
+	gorch.client = client.New(baseUrl)
+	return gorch
+}
 
-// TODO: return some deserialised object
 func (gorch *Gorch) Get(endpoint string) *Gorch {
 	gorch.currentRequest = request.New("GET", gorch.baseUrl+endpoint)
 	return gorch
@@ -33,5 +33,5 @@ func (gorch *Gorch) WithHeaders(headers map[string]string) *Gorch {
 }
 
 func (gorch *Gorch) Execute() {
-	client.execute(gorch.currentRequest)
+	gorch.client.execute(gorch.currentRequest)
 }
