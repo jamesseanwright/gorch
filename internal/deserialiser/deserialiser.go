@@ -3,18 +3,23 @@ package deserialiser
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 )
 
-func InstanceFromReader(reader io.Reader, targetPtr interface{}) error {
-	decoder := json.NewDecoder(reader)
+func ToMap(reader io.Reader) (map[string]interface{}, error) {
+	buffer, err := ioutil.ReadAll(reader)
 
-	for decoder.More() {
-		err := decoder.Decode(targetPtr)
-
-		if err != nil {
-			return err
-		}
+	if err != nil {
+		return nil, err
 	}
 
-	return nil
+	var data map[string]interface{}
+
+	err = json.Unmarshal(buffer, &data)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

@@ -16,7 +16,7 @@ func New() *Client {
 	return client
 }
 
-func (client *Client) Execute(request request.Request) (interface{}, error) {
+func (client *Client) Execute(request request.Request) (map[string]interface{}, error) {
 	respPayload, err := http.NewRequest(request.Method(), request.Url(), nil)
 
 	if err != nil {
@@ -29,8 +29,5 @@ func (client *Client) Execute(request request.Request) (interface{}, error) {
 		return nil, err
 	}
 
-	target := request.DeserialisationTarget()
-
-	err = deserialiser.InstanceFromReader(resp.Body, target)
-	return target, err
+	return deserialiser.ToMap(resp.Body)
 }

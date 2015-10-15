@@ -1,27 +1,20 @@
 package deserialiser
 
 import (
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
 
-type TestStruct struct {
-	name string
-	age  int
-	pets []string
-}
-
-func TestDeserialiseToInstance(t *testing.T) {
-	const testName = "It should deserialise JSON data to an instance of the specified type"
+func TestToMap(t *testing.T) {
+	const testName = "It should deserialise JSON data to a map"
 	const json = `{ "name": "Bob", "age": 6, "pets": [ "Trevor", "Toby" ] }`
 
 	reader := strings.NewReader(json)
 
-	testInstance := new(TestStruct)
-	fmt.Println(&testInstance)
-	InstanceFromReader(reader, &testInstance)
-	fmt.Println(*testInstance)
-	assert.EqualValues(t, "Barb", testInstance.name)
+	data, err := ToMap(reader)
+	assert.Empty(t, err)
+	assert.EqualValues(t, "Bob", data["name"])
+	assert.EqualValues(t, 6, data["age"])
+	assert.EqualValues(t, [2]string{"Trevor", "Toby"}, data["pets"])
 }
