@@ -17,13 +17,13 @@ func New() *Client {
 }
 
 func (client *Client) Execute(request request.Request) (map[string]interface{}, error) {
-	respPayload, err := http.NewRequest(request.Method(), request.Url(), nil)
+	reqPayload, err := http.NewRequest(request.Method(), request.Url(), nil)
 
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := client.httpClient.Do(respPayload)
+	resp, err := client.httpClient.Do(reqPayload)
 
 	if err != nil {
 		return nil, err

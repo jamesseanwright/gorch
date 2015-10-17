@@ -7,6 +7,7 @@ import (
 type GetRequest struct {
 	url         string
 	queryString string
+	headers     map[string]string
 }
 
 func (getRequest *GetRequest) Url() string {
@@ -23,6 +24,10 @@ func (getRequest *GetRequest) Body() string {
 
 func (getRequest *GetRequest) SetParams(params map[string]string) {
 	getRequest.queryString = internal.BuildQueryString(params)
+}
+
+func (getRequest *GetRequest) SetHeaders(headers map[string]string) {
+	getRequest.headers = headers
 }
 
 func NewGetRequest(url string) *GetRequest {

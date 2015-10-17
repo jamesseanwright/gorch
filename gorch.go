@@ -14,6 +14,7 @@ type Gorch struct {
 func New(baseUrl string) *Gorch {
 	gorch := new(Gorch)
 	gorch.client = client.New()
+	gorch.baseUrl = baseUrl
 	return gorch
 }
 
@@ -28,10 +29,10 @@ func (gorch *Gorch) WithParams(params map[string]string) *Gorch {
 }
 
 func (gorch *Gorch) WithHeaders(headers map[string]string) *Gorch {
-	//gorch.currentRequest.SetHeaders(headers)
+	gorch.currentRequest.SetHeaders(headers)
 	return gorch
 }
 
-func (gorch *Gorch) Execute() {
-	gorch.client.Execute(gorch.currentRequest)
+func (gorch *Gorch) Execute() (map[string]interface{}, error) {
+	return gorch.client.Execute(gorch.currentRequest)
 }

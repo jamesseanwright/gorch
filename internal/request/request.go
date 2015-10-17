@@ -5,4 +5,5 @@ type Request interface {
 	Method() string
 	Body() string
 	SetParams(params map[string]string)
+	SetHeaders(params map[string]string)
 }
