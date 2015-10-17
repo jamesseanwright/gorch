@@ -32,11 +32,6 @@ func (gorch *Gorch) WithHeaders(headers map[string]string) *Gorch {
 	return gorch
 }
 
-func (gorch *Gorch) DeserialiseTo(target interface{}) *Gorch {
-	gorch.currentRequest.SetDeserialisationTarget(target)
-	return gorch
-}
-
 func (gorch *Gorch) Execute() {
 	gorch.client.Execute(gorch.currentRequest)
 }

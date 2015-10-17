@@ -16,5 +16,5 @@ func TestToMap(t *testing.T) {
 	assert.Empty(t, err)
 	assert.EqualValues(t, "Bob", data["name"])
 	assert.EqualValues(t, 6, data["age"])
-	assert.EqualValues(t, [2]string{"Trevor", "Toby"}, data["pets"])
+	assert.EqualValues(t, []interface{}{"Trevor", "Toby"}, data["pets"])
 }
